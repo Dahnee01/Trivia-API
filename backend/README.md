@@ -214,8 +214,8 @@ The API will return three error types when requests fail:
 
 - General:
   - Creates a new question using the submitted question, answer ,dificulty and
-    category . Returns the id of the created book, success value and total
-    questions
+    category .
+  - Returns the id of the created book, success value and total questions
 - Sample:`curl http://127.0.0.1:5000/questions -X POST -H "Content-Type: application/json" -d '{"question": "What is my name?", "answer": "noname","difficulty": 1,"category": 1}''`
 
 ```
@@ -232,10 +232,9 @@ The API will return three error types when requests fail:
 - General:
 
   - Get questions based on search term
-  - Return question which matches the word
-    searched for, t0tal questions, success value 
-  _ Request Argument :    `searchTerm`
- 
+  - Return question which matches the word searched for, t0tal questions,
+    success value
+  - Request Argument : `searchTerm`
 
 - Sample:` curl http://127.0.0.1:5000/search -X POST -H "Content-Type: application/json" -d '{"searchTerm":"name"}'`
 
@@ -313,7 +312,7 @@ The API will return three error types when requests fail:
     not one of the previous questions and the success value
 - Sample:` curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions":[],"quiz_category": {"id":4, "type":"History"}}'`
 
-```
+````
 {
    {
       "question":{
@@ -324,7 +323,7 @@ The API will return three error types when requests fail:
          "question":"Who discovered penicillin?"},
          "success":true}
 }
-```
+```git
 
 ## Testing
 
@@ -335,4 +334,4 @@ dropdb trivia_test
 createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
-```
+````
