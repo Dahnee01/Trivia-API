@@ -312,7 +312,7 @@ The API will return three error types when requests fail:
     not one of the previous questions and the success value
 - Sample:` curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions":[],"quiz_category": {"id":4, "type":"History"}}'`
 
-````
+```
 {
    {
       "question":{
@@ -323,7 +323,7 @@ The API will return three error types when requests fail:
          "question":"Who discovered penicillin?"},
          "success":true}
 }
-```git
+```
 
 ## Testing
 
@@ -334,4 +334,4 @@ dropdb trivia_test
 createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
-````
+```
