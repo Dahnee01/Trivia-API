@@ -196,7 +196,7 @@ The API will return three error types when requests fail:
 
 - General:
   - Delets a question by using the question_id value
-  - if success resturns a sucess messgae true, deleted-id of question deleted
+  - if success returns a success messgae true, deleted-id of question deleted
     and total question left
   - Request Arguments: `id`
 - Sample: `curl -X DELETE http://127.0.0.1:5000/questions/2`
@@ -231,9 +231,11 @@ The API will return three error types when requests fail:
 
 - General:
 
-  - Get questions based on search term -Return question which matches the word
-    searched for, tatal_questions, success value -takes request argumnets of
-    searchTerm
+  - Get questions based on search term
+  - Return question which matches the word
+    searched for, t0tal questions, success value 
+  _ Request Argument :    `searchTerm`
+ 
 
 - Sample:` curl http://127.0.0.1:5000/search -X POST -H "Content-Type: application/json" -d '{"searchTerm":"name"}'`
 
@@ -306,9 +308,9 @@ The API will return three error types when requests fail:
 ## POST /quizzes
 
 - General:
-- Get questions to play the quiz
-- Return a random question within the given category, if provided, and that is
-  not one of the previous questions and the success value
+  - Get questions to play the quiz
+  - Return a random question within the given category, if provided, and that is
+    not one of the previous questions and the success value
 - Sample:` curl http://127.0.0.1:5000/quizzes -X POST -H "Content-Type: application/json" -d '{"previous_questions":[],"quiz_category": {"id":4, "type":"History"}}'`
 
 ```
