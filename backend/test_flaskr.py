@@ -92,15 +92,15 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(data['message'],"resource not found")    
     
 
-    # def test_delete_question(self):
-    #     res=self.client().delete('/questions/6')
-    #     data=json.loads(res.data)
-    #     question= Question.query.filter(Question.id == 6).one_or_none()
+    def test_delete_question(self):
+        res=self.client().delete('/questions/6')
+        data=json.loads(res.data)
+        question= Question.query.filter(Question.id == 6).one_or_none()
 
-    #     self.assertEqual(res.status_code,200)
-    #     self.assertEqual(data['success'],True)
-    #     self.assertEqual(data['deleted'],6)
-    #     self.assertTrue(data['total_questions'])
+        self.assertEqual(res.status_code,200)
+        self.assertEqual(data['success'],True)
+        self.assertEqual(data['deleted'],6)
+        self.assertTrue(data['total_questions'])
 
 
 
