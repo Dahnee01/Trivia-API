@@ -1,5 +1,5 @@
 .vscode
-backend/__pycahe__
+__pycache__/
 ## node modules
 node_modules
 venv
