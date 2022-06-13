@@ -1,0 +1,7 @@
+.vscode
+backend/__pycahe__
+## node modules
+node_modules
+venv
+
+
