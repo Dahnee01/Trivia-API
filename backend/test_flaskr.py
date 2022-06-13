@@ -15,9 +15,14 @@ class TriviaTestCase(unittest.TestCase):
         self.app = create_app()
         self.client = self.app.test_client
         self.database_name = "trivia_test"
-        self.database_path =  "postgresql://{}:{}@{}/{}".format(
-            "postgres", "123", "localhost:5433", self.database_name
-        )
+        self.db_host = os.environ.get('DB_HOST')
+        self.db_user=os.environ.get('DB_USER')
+        self.db_password=os.environ.get('DB_PASS')
+        self.database_path = 'postgresql://{}:{}@{}/{}'.format(self.db_user,self.db_password,self.db_host, self.database_name)
+
+        # self.database_path =  "postgresql://{}:{}@{}/{}".format(
+        #     "postgres", "123", "localhost:5433", self.database_name
+        # )
         setup_db(self.app, self.database_path)
 
         self.new_question = {
@@ -68,16 +73,21 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)   
         self.assertEqual(data['success'],False)
         self.assertEqual(data['message'],"resource not found")
-    
+    def test_get_categories(self):
+        res = self.client().get("/categories")
+        data = json.loads(res.data)
+
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(len(data['categories']))    
 
     def test_delete_question(self):
-        res=self.client().delete('/questions/65')
+        res=self.client().delete('/questions/6')
         data=json.loads(res.data)
-        question= Question.query.filter(Question.id==65).one_or_none()
+        question= Question.query.filter(Question.id == 6).one_or_none()
 
         self.assertEqual(res.status_code,200)
         self.assertEqual(data['success'],True)
-        self.assertEqual(data['deleted'],65)
+        self.assertEqual(data['deleted'],6)
         self.assertTrue(data['total_questions'])
 
 
@@ -115,13 +125,13 @@ class TriviaTestCase(unittest.TestCase):
 
 
     def test_get_questions_search_with_results(self):
-        res = self.client().post("/questions/search", json={"searchTerm": "sky"})
+        res = self.client().post("/questions/search", json={"searchTerm": "what"})
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data["success"], True)
         self.assertTrue(data["total_questions"])
-        self.assertEqual(len(data["questions"]), 1)
+       
 
 
     def test_get_questions_search_without_results(self):
