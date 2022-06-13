@@ -73,12 +73,24 @@ class TriviaTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)   
         self.assertEqual(data['success'],False)
         self.assertEqual(data['message'],"resource not found")
+
+
     def test_get_categories(self):
         res = self.client().get("/categories")
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
-        self.assertTrue(len(data['categories']))    
+        self.assertTrue(len(data['categories'])) 
+
+
+    def test_404_if_category_not(self):
+        res=self.client().get('/categories/140')
+        data=json.loads(res.data)  
+
+        self.assertEqual(res.status_code,404)
+        self.assertEqual(data['success'],False)
+        self.assertEqual(data['message'],"resource not found")    
+    
 
     def test_delete_question(self):
         res=self.client().delete('/questions/6')

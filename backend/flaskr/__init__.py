@@ -45,14 +45,18 @@ def create_app(test_config=None):
     """
     @app.route('/categories')
     def get_categories():
-        categories = Category.query.order_by(Category.id).all()
-        formatted_categories = [categorie.format() for categorie in categories]
+        try:
 
-        return jsonify({
-            'success': True,
-            'categories': {category.id: category.type for category in categories},
-            'total_categories': len(formatted_categories)
-        })
+            categories = Category.query.order_by(Category.id).all()
+            formatted_categories = [categorie.format() for categorie in categories]
+
+            return jsonify({
+                'success': True,
+                'categories': {category.id: category.type for category in categories},
+                'total_categories': len(formatted_categories)
+            })
+        except:
+             abort(404)   
 
     """
     @TODO:
